@@ -1,36 +1,3 @@
-CONFIG
-======
-
-Description
------------
-Config role to install Satellite configuration data:
-* Create host collections
-* Create lifecycle environments
-* Create content and composite content views, publish if changed
-* Create activation keys
-* Create subnets
-* Create domains
-* Create hostgroups
-* Create compute nodes - TODO
-* Create compute resources - TODO
-* Create Ansible roles to configure VMs - TODO
-* Create hosts - TODO
-
-
-Requirements
-------------
-
-Ansible 2.8 or higher
-Satellite-ansible-collection
-Red Hat Enterprise Linux 7 or equivalent
-Valid Red Hat Subscription
-A fully installed Satellite version 6.6 or higher
-Enabled and sync'd repos
-
-
-Role Variables
---------------
-
 # defaults file for sat_config
 # yamllint disable-line rule:line-length
 satellite_admin_username: "{{ lookup('env', 'SATELLITE_USERNAME') | mandatory }}"
@@ -121,6 +88,7 @@ satellite_activation_keys:
     subscriptions:
       # yamllint disable-line rule:line-length
       - name: "CHANGEME"
+      # yamllint disable-line rule:line-length
       #- name: "Red Hat Enterprise Linux Server with Smart Management, Standard (Physical or Virtual Nodes)"
     content_overrides:
       - label: rhel-7-server-ansible-2.8-rpms
@@ -156,7 +124,7 @@ satellite_activation_keys:
 #    discovery_proxy: "{{ satellite_fqdn }}"
 #    httpboot_proxy: "{{ satellite_fqdn }}"
 #    tftp_proxy: "{{ satellite_fqdn }}"
-#    remote_execution_proxies: 
+#    remote_execution_proxies:
 #      - "{{ satellite_fqdn }}"
 #    server_url: "{{ satellite_server_url }}"
 
@@ -212,31 +180,3 @@ satellite_activation_keys:
 #    parent: "BASELINE/VM/SOMEAPP"
 #    organization: "{{ satellite_organization }}"
 #    state: present
-
-Dependencies
-------------
-
-From Ansible Galaxy
-- oasis_roles.system
-- theforeman.foreman
-
-Example Playbook
-----------------
-```
----
-    - hosts: servers
-      roles:
-         - { role: config }
-```
-
-License
--------
-
-[GPLv3](LICENSE)
-
-Author Information
-------------------
-
-Cory McKee <cmckee@redhat.com>
-Ron Sawyer <rsawyer@redhat.com>
-Greg Hellings <ghelling@redhat.com>
